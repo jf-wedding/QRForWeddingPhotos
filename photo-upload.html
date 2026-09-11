@@ -1,1 +1,1653 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>J & F — Upload Wedding Photos</title>
+
+    <meta
+        name="description"
+        content="Share your favorite wedding photos with Jose Ernesto and Fynee."
+    >
+
+    <style>
+        :root {
+            --burgundy: #7B1128;
+            --burgundy-dark: #5d0d1e;
+            --gold: #c9a227;
+
+            --background: #fff7f8;
+            --card: #ffffff;
+            --cream: #fffaf5;
+
+            --text: #3d2929;
+            --muted: #765f5f;
+
+            --border: #eadbdd;
+            --success: #39734a;
+            --error: #a52a2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(201, 162, 39, 0.10),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff4f6,
+                    #fffaf7,
+                    #fdf0f2
+                );
+
+            padding: 24px 14px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card);
+
+            border-radius: 28px;
+
+            padding: 38px 30px 32px;
+
+            box-shadow:
+                0 20px 60px rgba(123, 17, 40, 0.12),
+                0 3px 12px rgba(0, 0, 0, 0.04);
+
+            border: 1px solid rgba(123, 17, 40, 0.08);
+        }
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+        }
+
+        .date {
+            color: var(--burgundy);
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 14px;
+        }
+
+        .monogram {
+            color: var(--burgundy);
+
+            font-size: 44px;
+
+            line-height: 1;
+
+            margin-bottom: 12px;
+        }
+
+        .title {
+            color: var(--burgundy);
+
+            font-size: clamp(30px, 7vw, 42px);
+
+            font-weight: normal;
+
+            line-height: 1.15;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+
+            font-size: 16px;
+
+            margin-bottom: 24px;
+        }
+
+        .divider {
+            width: 65px;
+            height: 2px;
+
+            background: var(--gold);
+
+            margin: 0 auto 28px;
+        }
+
+        /* INTRO */
+
+        .intro {
+            text-align: center;
+
+            max-width: 520px;
+
+            margin: 0 auto 28px;
+        }
+
+        .camera-icon {
+            width: 72px;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #fff4f6;
+
+            border: 1px solid rgba(123, 17, 40, 0.12);
+
+            font-size: 32px;
+        }
+
+        .intro h2 {
+            color: var(--burgundy);
+
+            font-size: 25px;
+
+            font-weight: normal;
+
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+        /* FORM */
+
+        .form-section {
+            margin-top: 25px;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .field label {
+            display: block;
+
+            color: var(--burgundy);
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .optional {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: normal;
+
+            margin-left: 5px;
+        }
+
+        .text-input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: #fff;
+
+            color: var(--text);
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .text-input:focus {
+            border-color: var(--burgundy);
+
+            box-shadow:
+                0 0 0 3px rgba(123, 17, 40, 0.08);
+        }
+
+        /* FILE PICKER */
+
+        .file-picker {
+            position: relative;
+
+            border: 2px dashed #dcbfc4;
+
+            border-radius: 18px;
+
+            background: var(--cream);
+
+            padding: 28px 18px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                border-color 0.2s,
+                background 0.2s;
+        }
+
+        .file-picker:hover {
+            border-color: var(--burgundy);
+
+            background: #fff6f7;
+        }
+
+        .file-picker.dragging {
+            border-color: var(--burgundy);
+
+            background: #fff0f3;
+        }
+
+        .file-picker-icon {
+            font-size: 36px;
+
+            margin-bottom: 10px;
+        }
+
+        .file-picker-title {
+            color: var(--burgundy);
+
+            font-size: 18px;
+
+            margin-bottom: 6px;
+        }
+
+        .file-picker-text {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .file-picker input {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            opacity: 0;
+
+            cursor: pointer;
+        }
+
+        /* SELECTED FILES */
+
+        .selected-section {
+            margin-top: 20px;
+
+            display: none;
+        }
+
+        .selected-section.visible {
+            display: block;
+        }
+
+        .selected-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+        }
+
+        .selected-title {
+            color: var(--burgundy);
+
+            font-size: 16px;
+        }
+
+        .file-count {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .file-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .file-item {
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 12px;
+
+            background: #f9eeee;
+
+            border: 1px solid var(--border);
+        }
+
+        .file-preview {
+            width: 100%;
+
+            aspect-ratio: 1 / 1;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .file-info {
+            padding: 8px 9px;
+
+            background: white;
+        }
+
+        .file-name {
+            color: var(--text);
+
+            font-size: 11px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            margin-bottom: 3px;
+        }
+
+        .file-size {
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        .remove-file {
+            position: absolute;
+
+            top: 7px;
+            right: 7px;
+
+            width: 28px;
+            height: 28px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            color: var(--burgundy);
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        /* UPLOAD BUTTON */
+
+        .upload-area {
+            margin-top: 28px;
+        }
+
+        .upload-button {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 999px;
+
+            padding: 16px 20px;
+
+            background: var(--burgundy);
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .upload-button:hover:not(:disabled) {
+            background: var(--burgundy-dark);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(123, 17, 40, 0.22);
+        }
+
+        .upload-button:disabled {
+            opacity: 0.55;
+
+            cursor: not-allowed;
+        }
+
+        /* PROGRESS */
+
+        .progress-section {
+            display: none;
+
+            margin-top: 22px;
+        }
+
+        .progress-section.visible {
+            display: block;
+        }
+
+        .progress-label {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .progress-track {
+            width: 100%;
+
+            height: 9px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background: #f0dfe2;
+        }
+
+        .progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background: var(--burgundy);
+
+            transition: width 0.3s ease;
+        }
+
+        /* MESSAGE */
+
+        .message {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+        .message.visible {
+            display: block;
+        }
+
+        .message.success {
+            background: #edf7ef;
+
+            color: var(--success);
+
+            border: 1px solid #cde5d2;
+        }
+
+        .message.error {
+            background: #fff0f0;
+
+            color: var(--error);
+
+            border: 1px solid #eccaca;
+        }
+
+        /* NOTE */
+
+        .note {
+            margin-top: 25px;
+
+            padding: 17px;
+
+            border-radius: 15px;
+
+            background: #fffaf5;
+
+            border: 1px solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            text-align: center;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-names {
+            color: var(--burgundy);
+
+            font-size: 18px;
+
+            margin-bottom: 7px;
+        }
+
+        .footer-verse {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .footer-verse strong {
+            color: var(--burgundy);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 12px 9px;
+            }
+
+            .card {
+                padding: 30px 17px 25px;
+
+                border-radius: 22px;
+            }
+
+            .date {
+                font-size: 11px;
+
+                letter-spacing: 1.4px;
+            }
+
+            .monogram {
+                font-size: 38px;
+            }
+
+            .title {
+                font-size: 30px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .intro h2 {
+                font-size: 22px;
+            }
+
+            .file-list {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="page">
+
+    <section class="card">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <p class="date">
+                September 19, 2026 · Baguio City
+            </p>
+
+            <div class="monogram">
+                J ♥ F
+            </div>
+
+            <h1 class="title">
+                Share Your Photos
+            </h1>
+
+            <p class="subtitle">
+                Jose Ernesto &amp; Fynee
+            </p>
+
+            <div class="divider"></div>
+
+        </header>
+
+
+        <!-- INTRO -->
+
+        <section class="intro">
+
+            <div class="camera-icon">
+                📸
+            </div>
+
+            <h2>
+                We Would Love to See Your Memories!
+            </h2>
+
+            <p>
+                Did you take photos during our wedding?
+                Please share your favorite moments with us.
+                Your photos will help us remember our special day
+                from everyone's perspective.
+            </p>
+
+        </section>
+
+
+        <!-- UPLOAD FORM -->
+
+        <section class="form-section">
+
+            <!-- OPTIONAL NAME -->
+
+            <div class="field">
+
+                <label for="guestName">
+                    Your Name
+                    <span class="optional">(optional)</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="guestName"
+                    class="text-input"
+                    maxlength="100"
+                    placeholder="e.g. Juan Dela Cruz"
+                    autocomplete="name"
+                >
+
+            </div>
+
+
+            <!-- PHOTO SELECTOR -->
+
+            <div class="field">
+
+                <label>
+                    Select Your Photos
+                </label>
+
+                <div
+                    class="file-picker"
+                    id="filePicker"
+                >
+
+                    <div class="file-picker-icon">
+                        📷
+                    </div>
+
+                    <div class="file-picker-title">
+                        Tap to choose photos
+                    </div>
+
+                    <div class="file-picker-text">
+                        You can select multiple photos<br>
+                        JPG, JPEG, PNG, HEIC and WebP
+                    </div>
+
+                    <input
+                        type="file"
+                        id="photoInput"
+                        accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                        multiple
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SELECTED PHOTOS -->
+
+            <section
+                class="selected-section"
+                id="selectedSection"
+            >
+
+                <div class="selected-header">
+
+                    <h3 class="selected-title">
+                        Selected Photos
+                    </h3>
+
+                    <span
+                        class="file-count"
+                        id="fileCount"
+                    >
+                        0 photos
+                    </span>
+
+                </div>
+
+                <div
+                    class="file-list"
+                    id="fileList"
+                ></div>
+
+            </section>
+
+
+            <!-- UPLOAD -->
+
+            <div class="upload-area">
+
+                <button
+                    type="button"
+                    id="uploadButton"
+                    class="upload-button"
+                    disabled
+                >
+                    Upload My Photos ♥
+                </button>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <section
+                class="progress-section"
+                id="progressSection"
+            >
+
+                <div class="progress-label">
+
+                    <span id="progressText">
+                        Preparing your photos...
+                    </span>
+
+                    <span id="progressPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- STATUS MESSAGE -->
+
+            <div
+                class="message"
+                id="message"
+            ></div>
+
+
+            <!-- NOTE -->
+
+            <div class="note">
+
+                <strong>A little note from us ♥</strong>
+                <br>
+
+                Please share only photos that you are comfortable
+                sending to us.
+
+                <br><br>
+
+                For the smoothest upload experience,
+                we recommend selecting a reasonable number of photos
+                at a time.
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <p class="footer-names">
+                Jose Ernesto &amp; Fynee
+            </p>
+
+            <p class="footer-verse">
+                “What God has joined together,
+                let no one separate.”
+                <br>
+
+                <strong>Matthew 19:6</strong>
+            </p>
+
+        </footer>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    /*
+     * ============================================================
+     * J & F WEDDING PHOTO UPLOADER
+     * ============================================================
+     *
+     * The Google Apps Script URL will be added here later.
+     *
+     * DO NOT change anything else until the backend is connected.
+     */
+
+    const UPLOAD_ENDPOINT =
+        "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+
+    /*
+     * Maximum number of photos a guest can select at once.
+     */
+
+    const MAX_PHOTOS = 30;
+
+
+    /*
+     * Maximum individual photo size.
+     *
+     * We are starting conservatively because the final upload
+     * method will send the image through Google Apps Script.
+     */
+
+    const MAX_FILE_SIZE = 8 * 1024 * 1024;
+
+
+    /*
+     * Allowed image MIME types.
+     */
+
+    const ALLOWED_TYPES = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/heic",
+        "image/heif"
+    ];
+
+
+    /*
+     * DOM ELEMENTS
+     */
+
+    const guestName =
+        document.getElementById("guestName");
+
+    const photoInput =
+        document.getElementById("photoInput");
+
+    const filePicker =
+        document.getElementById("filePicker");
+
+    const selectedSection =
+        document.getElementById("selectedSection");
+
+    const fileList =
+        document.getElementById("fileList");
+
+    const fileCount =
+        document.getElementById("fileCount");
+
+    const uploadButton =
+        document.getElementById("uploadButton");
+
+    const progressSection =
+        document.getElementById("progressSection");
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const progressText =
+        document.getElementById("progressText");
+
+    const progressPercent =
+        document.getElementById("progressPercent");
+
+    const message =
+        document.getElementById("message");
+
+
+    /*
+     * Holds the currently selected files.
+     */
+
+    let selectedFiles = [];
+
+
+    /*
+     * ============================================================
+     * FILE SELECTION
+     * ============================================================
+     */
+
+    photoInput.addEventListener(
+        "change",
+        function () {
+
+            addFiles(
+                Array.from(photoInput.files)
+            );
+
+            /*
+             * Reset the input so selecting the same photo again
+             * will trigger the change event.
+             */
+
+            photoInput.value = "";
+
+        }
+    );
+
+
+    /*
+     * Allow clicking anywhere in the drop zone.
+     */
+
+    filePicker.addEventListener(
+        "click",
+        function () {
+
+            photoInput.click();
+
+        }
+    );
+
+
+    /*
+     * Drag and drop support for desktop.
+     */
+
+    filePicker.addEventListener(
+        "dragover",
+        function (event) {
+
+            event.preventDefault();
+
+            filePicker.classList.add("dragging");
+
+        }
+    );
+
+
+    filePicker.addEventListener(
+        "dragleave",
+        function () {
+
+            filePicker.classList.remove("dragging");
+
+        }
+    );
+
+
+    filePicker.addEventListener(
+        "drop",
+        function (event) {
+
+            event.preventDefault();
+
+            filePicker.classList.remove("dragging");
+
+            addFiles(
+                Array.from(event.dataTransfer.files)
+            );
+
+        }
+    );
+
+
+    /*
+     * ============================================================
+     * ADD FILES
+     * ============================================================
+     */
+
+    function addFiles(files) {
+
+        clearMessage();
+
+
+        for (const file of files) {
+
+            if (selectedFiles.length >= MAX_PHOTOS) {
+
+                showMessage(
+                    "You can select up to " +
+                    MAX_PHOTOS +
+                    " photos at a time.",
+                    "error"
+                );
+
+                break;
+
+            }
+
+
+            /*
+             * Check file type.
+             */
+
+            if (!ALLOWED_TYPES.includes(file.type)) {
+
+                showMessage(
+                    file.name +
+                    " is not a supported image format.",
+                    "error"
+                );
+
+                continue;
+
+            }
+
+
+            /*
+             * Check file size.
+             */
+
+            if (file.size > MAX_FILE_SIZE) {
+
+                showMessage(
+                    file.name +
+                    " is larger than 8 MB and was not added.",
+                    "error"
+                );
+
+                continue;
+
+            }
+
+
+            /*
+             * Prevent duplicate selection.
+             */
+
+            const duplicate =
+                selectedFiles.some(
+                    existing =>
+                        existing.name === file.name &&
+                        existing.size === file.size &&
+                        existing.lastModified === file.lastModified
+                );
+
+
+            if (duplicate) {
+                continue;
+            }
+
+
+            selectedFiles.push(file);
+
+        }
+
+
+        renderFiles();
+
+    }
+
+
+    /*
+     * ============================================================
+     * DISPLAY SELECTED FILES
+     * ============================================================
+     */
+
+    function renderFiles() {
+
+        fileList.innerHTML = "";
+
+
+        if (selectedFiles.length === 0) {
+
+            selectedSection.classList.remove("visible");
+
+            uploadButton.disabled = true;
+
+            return;
+
+        }
+
+
+        selectedSection.classList.add("visible");
+
+        uploadButton.disabled = false;
+
+
+        fileCount.textContent =
+            selectedFiles.length +
+            (
+                selectedFiles.length === 1
+                    ? " photo"
+                    : " photos"
+            );
+
+
+        selectedFiles.forEach(
+            (file, index) => {
+
+                const item =
+                    document.createElement("div");
+
+                item.className = "file-item";
+
+
+                const image =
+                    document.createElement("img");
+
+                image.className = "file-preview";
+
+                image.alt =
+                    "Selected wedding photo";
+
+
+                /*
+                 * Create a temporary local preview.
+                 */
+
+                image.src =
+                    URL.createObjectURL(file);
+
+
+                const info =
+                    document.createElement("div");
+
+                info.className = "file-info";
+
+
+                const name =
+                    document.createElement("div");
+
+                name.className = "file-name";
+
+                name.textContent =
+                    file.name;
+
+
+                const size =
+                    document.createElement("div");
+
+                size.className = "file-size";
+
+                size.textContent =
+                    formatFileSize(file.size);
+
+
+                const remove =
+                    document.createElement("button");
+
+                remove.type = "button";
+
+                remove.className =
+                    "remove-file";
+
+                remove.innerHTML =
+                    "×";
+
+                remove.setAttribute(
+                    "aria-label",
+                    "Remove " + file.name
+                );
+
+
+                remove.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.stopPropagation();
+
+                        selectedFiles.splice(
+                            index,
+                            1
+                        );
+
+                        renderFiles();
+
+                    }
+                );
+
+
+                info.appendChild(name);
+
+                info.appendChild(size);
+
+                item.appendChild(image);
+
+                item.appendChild(info);
+
+                item.appendChild(remove);
+
+                fileList.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    /*
+     * ============================================================
+     * UPLOAD BUTTON
+     * ============================================================
+     */
+
+    uploadButton.addEventListener(
+        "click",
+        async function () {
+
+            if (selectedFiles.length === 0) {
+                return;
+            }
+
+
+            /*
+             * Make sure the backend URL has been configured.
+             */
+
+            if (
+                UPLOAD_ENDPOINT ===
+                "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"
+            ) {
+
+                showMessage(
+                    "The photo upload service has not been connected yet. Please contact the couple.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            uploadButton.disabled = true;
+
+            progressSection.classList.add("visible");
+
+            clearMessage();
+
+
+            try {
+
+                await uploadPhotos();
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "Something went wrong while uploading your photos. Please try again.",
+                    "error"
+                );
+
+                uploadButton.disabled = false;
+
+            }
+
+        }
+    );
+
+
+    /*
+     * ============================================================
+     * UPLOAD PHOTOS
+     * ============================================================
+     *
+     * The actual backend connection will be finalized with the
+     * Google Apps Script.
+     */
+
+    async function uploadPhotos() {
+
+        const total =
+            selectedFiles.length;
+
+
+        for (
+            let i = 0;
+            i < total;
+            i++
+        ) {
+
+            const file =
+                selectedFiles[i];
+
+
+            const current =
+                i + 1;
+
+
+            progressText.textContent =
+                "Uploading photo " +
+                current +
+                " of " +
+                total +
+                "...";
+
+
+            const percent =
+                Math.round(
+                    (i / total) * 100
+                );
+
+
+            updateProgress(percent);
+
+
+            /*
+             * Convert the image into Base64.
+             *
+             * The Google Apps Script backend will receive this
+             * and save it into your Drive.
+             */
+
+            const base64 =
+                await fileToBase64(file);
+
+
+            const payload = {
+
+                guestName:
+                    guestName.value.trim() ||
+                    "Anonymous Guest",
+
+                fileName:
+                    file.name,
+
+                mimeType:
+                    file.type,
+
+                file:
+                    base64
+
+            };
+
+
+            /*
+             * This request will be finalized when we build
+             * the Google Apps Script backend.
+             */
+
+            const response =
+                await fetch(
+                    UPLOAD_ENDPOINT,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(payload)
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Upload failed."
+                );
+
+            }
+
+        }
+
+
+        updateProgress(100);
+
+        progressText.textContent =
+            "All photos uploaded!";
+
+
+        showMessage(
+            "Thank you! ♥ Your photos have been successfully shared with Jose Ernesto & Fynee.",
+            "success"
+        );
+
+
+        /*
+         * Clear the selected photos after successful upload.
+         */
+
+        selectedFiles = [];
+
+        renderFiles();
+
+        guestName.value = "";
+
+        uploadButton.disabled = true;
+
+    }
+
+
+    /*
+     * ============================================================
+     * FILE → BASE64
+     * ============================================================
+     */
+
+    function fileToBase64(file) {
+
+        return new Promise(
+            (resolve, reject) => {
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function () {
+
+                        /*
+                         * Remove the:
+                         *
+                         * data:image/jpeg;base64,
+                         *
+                         * portion.
+                         */
+
+                        const result =
+                            reader.result;
+
+                        const base64 =
+                            result.split(",")[1];
+
+                        resolve(base64);
+
+                    };
+
+
+                reader.onerror =
+                    function () {
+
+                        reject(
+                            new Error(
+                                "Could not read the photo."
+                            )
+                        );
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+    }
+
+
+    /*
+     * ============================================================
+     * PROGRESS BAR
+     * ============================================================
+     */
+
+    function updateProgress(percent) {
+
+        progressBar.style.width =
+            percent + "%";
+
+        progressPercent.textContent =
+            percent + "%";
+
+    }
+
+
+    /*
+     * ============================================================
+     * FILE SIZE
+     * ============================================================
+     */
+
+    function formatFileSize(bytes) {
+
+        if (bytes < 1024) {
+            return bytes + " B";
+        }
+
+        if (bytes < 1024 * 1024) {
+
+            return (
+                (bytes / 1024).toFixed(1) +
+                " KB"
+            );
+
+        }
+
+        return (
+            (bytes / (1024 * 1024)).toFixed(1) +
+            " MB"
+        );
+
+    }
+
+
+    /*
+     * ============================================================
+     * MESSAGES
+     * ============================================================
+     */
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        message.textContent =
+            text;
+
+        message.className =
+            "message visible " +
+            type;
+
+    }
+
+
+    function clearMessage() {
+
+        message.textContent = "";
+
+        message.className =
+            "message";
+
+    }
+
+</script>
+
+</body>
+</html>
+```
 
