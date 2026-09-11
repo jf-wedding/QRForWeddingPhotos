@@ -1,0 +1,195 @@
+/* Styles for Wedding Reservation */
+:root{
+  --bg:#fff5f6; /* soft ivory/pale pink background */
+  --card:#fff;
+  --accent:#7B1128; /* burgundy */
+  --muted:#6e4b4b; /* muted burgundy/charcoal */
+  --max-width:760px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg),#fff);
+  color:#222;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:30px 16px 48px;
+}
+.page{width:100%;max-width:var(--max-width)}
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:36px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.header{ text-align:center }
+.date{color:var(--muted);margin:0 0 8px}
+.title{font-size:36px;margin:.25rem 0}
+.subtitle{margin:0;color:var(--muted);font-weight:600}
+.names{margin-top:8px;font-weight:600}
+.heart{font-size:28px;text-align:center;margin:18px 0;color:var(--accent)}
+.note{line-height:1.5;color:var(--muted)}
+.rsvp-by{margin:14px 0;font-weight:600}
+.rsvp-form{margin-top:6px}
+fieldset{border:0;padding:0;margin:0}
+legend{font-weight:700;margin-bottom:8px}
+label{display:block;margin-top:12px;font-size:14px}
+input[type=text],
+input[type=tel],
+input[type=number],
+select,
+textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  margin-top: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(123, 17, 40, 0.08);
+}
+.hint{display:block;font-size:12px;color:var(--muted)}
+.privacy{font-size:13px;color:var(--muted);margin:12px 0}
+.submit{background:var(--accent);color:#fff;padding:12px 16px;border:0;border-radius:8px;font-weight:700;cursor:pointer;width:100%}
+footer{margin-top:18px;text-align:center;color:var(--muted)}
+blockquote{margin:0;font-style:italic}
+/* RSVP success popup */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.popup-overlay[hidden] {
+  display: none;
+}
+
+.popup-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 25px;
+  background: #ffffff;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  animation: popupAppear 0.3s ease;
+}
+
+.popup-heart {
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 42px;
+}
+
+.popup-box h2 {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 28px;
+}
+
+.popup-box p {
+  margin: 0 0 25px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.popup-close {
+  min-width: 120px;
+  padding: 11px 30px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.popup-close:hover {
+  background: #5f0d1e;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@keyframes popupAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media(min-width:900px){
+  body{padding:72px}
+  .card{padding:48px}
+}
+/* Small couple photo above names */
+.couple-photo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 18px;
+}
+
+.couple-photo img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+/* Make it slightly smaller on phones */
+@media (max-width: 600px) {
+  .couple-photo img {
+    width: 95%;
+    max-width: 350px;
+  }
+}
+@media (max-width: 600px) {
+  body {
+    padding: 20px 12px 40px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .couple-photo {
+    margin: 25px 0 18px;
+  }
+
+  .couple-photo img {
+    max-width: 220px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+}
