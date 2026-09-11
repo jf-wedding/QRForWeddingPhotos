@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173126">
+  <title>Jose & Fynee — Wedding Photos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="title">
+      <div class="leaf" aria-hidden="true">◯</div>
 
+      <h1 id="title">Jose <span>&amp;</span> Fynee</h1>
+      <p class="date">September 19, 2026</p>
+
+      <p class="intro">
+        However you saw it today, we want to see it too.
+        Add your photos below — no account, no app.
+      </p>
+
+      <label class="field-label" for="guestName">
+        Your name <span>(optional)</span>
+      </label>
+      <input id="guestName" class="name-input" type="text"
+             placeholder="e.g. Aunt Rosa" autocomplete="name">
+
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime" multiple hidden>
+
+      <button id="chooseBtn" class="upload-box" type="button">
+        <strong>Choose or take photos</strong>
+        <span>JPG, PNG or video — pick as many as you like</span>
+      </button>
+
+      <div id="fileList" class="file-list" hidden></div>
+
+      <div id="progressWrap" class="progress-wrap" hidden>
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <p id="progressText">Uploading…</p>
+      </div>
+
+      <button id="submitBtn" class="submit-btn" type="button" disabled>
+        Add to the album
+      </button>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <section id="success" class="success" hidden>
+        <div class="success-icon">✓</div>
+        <h2>Thank you!</h2>
+        <p>Your memories have been added to our wedding album.</p>
+        <button id="addMoreBtn" class="secondary-btn" type="button">Add more photos</button>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
